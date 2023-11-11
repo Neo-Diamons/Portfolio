@@ -16,7 +16,9 @@ function Background() {
     }, [coords]);
 
     return (
-        <div className="group bg-gray-950 min-w-screen min-h-screen hover:cursor-none">
+        <div className="
+            group min-w-screen min-h-screen hover:cursor-none bg-gradient-radial from-gray-950 via-gray-950 bg-black
+        ">
             <div className="hidden group-hover:block min-w-screen min-h-screen">
                 <div
                     className="
