@@ -1,5 +1,5 @@
 import React from "react";
-import Background from "./pages/Background";
+import Background from "./pages/Background/Background";
 
 function App() {
     return (
