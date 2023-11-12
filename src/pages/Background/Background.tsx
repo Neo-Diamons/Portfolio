@@ -1,6 +1,6 @@
 import React from "react";
 import { getMousePosition } from "../../utils";
-import DisplaySnow from "./DisplaySnow";
+import { DisplaySnow } from "./";
 
 function Background() {
     const coords = getMousePosition();

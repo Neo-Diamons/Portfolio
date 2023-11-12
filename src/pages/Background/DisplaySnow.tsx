@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { randint, Flake } from "../../utils";
 import { Vector2 } from "../../utils/types";
-import DisplayQuadtree from "./DisplayQuadtree";
+import { DisplayQuadtree } from "./";
 
 function DisplaySnow ( { coords }: { coords: Vector2 } ) {
     const [ snow, setSnow ] = React.useState<Array<Flake>>([]);
