@@ -10,79 +10,81 @@ function isRectangleInsideRectangle (outer: Rectangle, inner: Rectangle): boolea
 }
 
 class QuadTreeNode {
-    square: Rectangle;
-    maxDepth: number;
-    depth: number;
+    private readonly _square: Rectangle;
+    private readonly _maxDepth: number;
+    private readonly _depth: number;
 
     children: Array<QuadTreeNode> = [];
 
     constructor (square: Rectangle, maxDepth: number, depth: number) {
-        this.square = square;
-        this.maxDepth = maxDepth;
-        this.depth = depth;
+        this._square = square;
+        this._maxDepth = maxDepth;
+        this._depth = depth;
     }
 
     insert (object: Rectangle): void {
-        if (!isRectangleInsideRectangle(this.square, object) || this.depth === this.maxDepth)
+        if (this._depth === this._maxDepth)
             return;
 
         if (this.children.length === 0) {
-            const half = { width: this.square.width / 2, height: this.square.height / 2 };
-            const offset = { x: this.square.right + half.width, y: this.square.top + half.height };
+            const half = { width: this._square.width / 2, height: this._square.height / 2 };
+            const offset = { x: this._square.right + half.width, y: this._square.top + half.height };
 
             const squares = [
-                { right: this.square.right, width: half.width, top: this.square.top, height: half.height },  // top      right   // 0b00
-                { right: offset.x,          width: half.width, top: this.square.top, height: half.height },  // top      left    // 0b01
-                { right: this.square.right, width: half.width, top: offset.y,        height: half.height },  // bottom   right   // 0b10
-                { right: offset.x,          width: half.width, top: offset.y,        height: half.height },  // bottom   left    // 0b11
+                { right: this._square.right, width: half.width, top: this._square.top, height: half.height },  // top      right   // 0b00
+                { right: offset.x,           width: half.width, top: this._square.top, height: half.height },  // top      left    // 0b01
+                { right: this._square.right, width: half.width, top: offset.y,         height: half.height },  // bottom   right   // 0b10
+                { right: offset.x,           width: half.width, top: offset.y,         height: half.height },  // bottom   left    // 0b11
             ];
 
-            this.children = squares.map((square) => new QuadTreeNode(square, this.maxDepth, this.depth + 1));
+            find: {
+                for (let i = 0; i < squares.length; i++)
+                    if (isRectangleInsideRectangle(squares[i], object))
+                        break find;
+                return;
+            }
+
+            this.children = squares.map((square) => new QuadTreeNode(square, this._maxDepth, this._depth + 1));
         }
 
-        for (let i = 0; i < 4; i++)
-            if (isRectangleInsideRectangle(this.children[i].square, object))
+        for (let i = 0; i < this.children.length; i++)
+            if (isRectangleInsideRectangle(this.children[i]._square, object))
                 return this.children[i].insert(object);
     }
 
     get (): Array<Rectangle> {
         if (this.children.length === 0)
-            return [this.square];
+            return [this._square];
 
         return this.children.flatMap((child) => child.get());
     }
 }
 
 class QuadTree {
-    width: number;
-    height: number;
-    maxDepth: number;
+    private readonly _width: number;
+    private readonly _height: number;
+    private readonly _maxDepth: number;
 
-    node: QuadTreeNode;
+    private _node: QuadTreeNode;
 
     constructor (width: number, height: number, maxDepth: number) {
-        this.width = width;
-        this.height = height;
-        this.maxDepth = maxDepth;
+        this._width = width;
+        this._height = height;
+        this._maxDepth = maxDepth;
 
-        this.node = new QuadTreeNode({ top: 0, right: 0, width: this.width, height: this.height }, this.maxDepth, 0);
-    }
-
-    resize (width: number, height: number): void {
-        this.width = width;
-        this.height = height;
+        this._node = new QuadTreeNode({ top: 0, right: 0, width: this._width, height: this._height }, this._maxDepth, 0);
     }
 
     insert (object: Rectangle): void {
-        this.node.insert(object);
+        this._node.insert(object);
     }
 
     clear (): void {
-        this.node.children = [];
+        this._node.children = [];
     }
 
     get (): Array<Rectangle> {
-        return this.node.get();
+        return this._node.get();
     }
 }
 

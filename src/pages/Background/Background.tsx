@@ -1,6 +1,6 @@
 import React from "react";
-import getMousePosition from "../../utils/getMousePosition";
-import DisplayQuadtree from "./DisplayQuadtree";
+import { getMousePosition } from "../../utils";
+import DisplaySnow from "./DisplaySnow";
 
 function Background() {
     const coords = getMousePosition();
@@ -9,9 +9,9 @@ function Background() {
         <div className="
             group min-w-screen min-h-screen hover:cursor-none bg-gradient-radial from-gray-950 via-gray-950 bg-black
         ">
-            <div className="hidden group-hover:block min-w-screen min-h-screen">
+            <div className="hidden group-hover:block">
                 <div
-                    className="absolute w-4 h-4 text-center bg-white rounded-full drop-shadow-glow blur-[2.5px]"
+                    className="absolute w-4 h-4 text-center bg-blue-800 rounded-full drop-shadow-glow blur-[2.5px]"
                     style={{ left: coords.x - 8, top: coords.y - 8 }}
                 />
 
@@ -25,9 +25,9 @@ function Background() {
                 >
                     <h1>({coords.x}, {coords.y})</h1>
                 </div>
-
-                <DisplayQuadtree coords={coords} />
             </div>
+
+            <DisplaySnow coords={coords} />
         </div>
     );
 }
