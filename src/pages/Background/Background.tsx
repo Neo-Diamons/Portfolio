@@ -11,7 +11,7 @@ function Background() {
         ">
             <div className="hidden group-hover:block min-w-screen min-h-screen">
                 <div
-                    className="absolute w-4 h-4 text-center bg-white rounded-full blur-sm"
+                    className="absolute w-4 h-4 text-center bg-white rounded-full drop-shadow-glow blur-[2.5px]"
                     style={{ left: coords.x - 8, top: coords.y - 8 }}
                 />
 

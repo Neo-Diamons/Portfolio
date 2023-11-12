@@ -18,7 +18,9 @@ function DisplayQuadtree ( { coords }: { coords: Vector2 } ) {
     }, [coords, dimensions]);
 
     return (
-        <svg viewBox={"0 0 " + dimensions.x + " " + dimensions.y} xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox={"0 0 " + dimensions.x + " " + dimensions.y} xmlns="http://www.w3.org/2000/svg"
+            className="drop-shadow-glow"
+        >
             {array.map((quad, index) => (
                 <rect
                     key={index}
