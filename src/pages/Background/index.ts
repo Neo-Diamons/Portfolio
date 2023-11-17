@@ -1,9 +1,9 @@
 import Background from "./Background";
-import DisplayQuadtree from "./DisplayQuadtree";
-import DisplaySnow from "./DisplaySnow";
-
+import DisplayEyes from "./DisplayEyes";
+// // import Eye from "./Eye";
+//
 export {
     Background,
-    DisplayQuadtree,
-    DisplaySnow
+    DisplayEyes,
+//     // Eye
 };
