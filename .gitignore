@@ -7,11 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Build files
 node_modules
 dist
 dist-ssr
 .vite
 *.local
+src/assets/languages.json
+src/assets/repositories.json
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +26,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment
+.env*

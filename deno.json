@@ -1,6 +1,7 @@
 {
   "tasks": {
     "dev": "deno run -A --node-modules-dir npm:vite",
+    "fetch": "deno run --allow-all --env-file scripts/fetch-github.ts",
     "build": "deno run -A --node-modules-dir npm:vite build",
     "preview": "deno run -A --node-modules-dir npm:vite preview",
     "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/"
@@ -42,6 +43,7 @@
     "autoprefixer": "npm:autoprefixer@^10.4.20",
     "class-variance-authority": "npm:class-variance-authority@^0.7.0",
     "clsx": "npm:clsx@^2.1.1",
+    "gsap": "npm:gsap@^3.12.5",
     "lucide-react": "npm:lucide-react@^0.453.0",
     "postcss": "npm:postcss@^8.4.47",
     "react": "npm:react@^18.3.1",

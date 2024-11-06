@@ -25,6 +25,11 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Fetch GitHub data
+        run: "deno task fetch"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build step
         run: "deno task build"
 
