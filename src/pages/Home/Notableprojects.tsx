@@ -16,7 +16,7 @@ export default function MyProject() {
       <div className="flex flex-row items-center gap-2">
         <Package className="size-8" />
         <h2 className="text-2xl font-bold">
-          My project
+        Notable projects
         </h2>
       </div>
       <div className="grid md:grid-cols-2 gap-4">

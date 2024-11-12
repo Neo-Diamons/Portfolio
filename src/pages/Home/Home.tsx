@@ -1,5 +1,5 @@
 import TechnologiesUsed from "./TechnologiesUsed.tsx";
-import MyProject from "@/pages/Home/MyProject.tsx";
+import MyProject from "./Notableprojects.tsx";
 
 export default function Home() {
   return (
