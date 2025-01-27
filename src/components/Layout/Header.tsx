@@ -7,13 +7,14 @@ import {
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { ModeToggle } from "./mode-toggle.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { Separator } from "@/components/ui/separator.tsx";
 import { useIsMobile } from "@/hooks/use-mobile.tsx";
 // @deno-types="@/vite-env.d.ts"
 import Profile from "@/assets/profile-little.webp";
 
 function HeaderDesktop() {
   return (
-    <header className="flex justify-between gap-4 px-4 h-16">
+    <div className="flex justify-between gap-4 px-4 h-16">
       <div className="flex items-center h-full gap-4">
         <Avatar className="rounded-none h-8 w-8">
           <AvatarImage src={Profile} alt="Profile picture" />
@@ -43,7 +44,7 @@ function HeaderDesktop() {
         </a>
         <ModeToggle />
       </div>
-    </header>
+    </div>
   );
 }
 
@@ -51,7 +52,7 @@ function HeaderMobile() {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <header className="flex justify-between items-center px-4 h-16">
+    <div className="flex justify-between items-center px-4 h-16">
       <div className="flex items-center h-full gap-4">
         <Avatar className="rounded-none h-8 w-8">
           <AvatarImage src={Profile} alt="Profile picture" />
@@ -108,12 +109,17 @@ function HeaderMobile() {
           </Button>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
 
 export default function Header() {
   const isMobile = useIsMobile();
 
-  return isMobile ? <HeaderMobile /> : <HeaderDesktop />;
+  return (
+    <header className="sticky top-0 z-50 bg-background shadow-md">
+      {isMobile ? <HeaderMobile /> : <HeaderDesktop />}
+      <Separator />
+    </header>
+  )
 }
