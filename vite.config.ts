@@ -1,17 +1,7 @@
-import { defineConfig, PluginOption } from 'vite'
-import deno from "@deno/vite-plugin";
-import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
-export default defineConfig(({ mode }) => {
-  return {
-    plugins: [deno(), react()] as PluginOption[],
-    resolve: {
-      alias: {
-        '@/': '/src/'
-      },
-    },
-    build: {
-      sourcemap: true,
-    }
-  }
-})
+export default defineConfig({
+	plugins: [sveltekit(), tailwindcss()]
+});
