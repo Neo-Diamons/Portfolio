@@ -6,7 +6,7 @@
 	import { Separator } from "$lib/components/ui/separator/index.js";
 	import { ModeToggle } from "$lib/components/ui/mode-toggle/index.js";
 
-	import { Github, Linkedin, Mail, Menu, X } from "lucide-svelte";
+	import { Github, Linkedin, Mail, Menu, X } from "@lucide/svelte";
 
 	import Profile from "$lib/assets/images/profile.webp";
 

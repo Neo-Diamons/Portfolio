@@ -6,7 +6,7 @@
 	import * as HoverCard from "$lib/components/ui/hover-card/index.js";
 	import { Badge } from "$lib/components/ui/badge/index.js";
 
-	import { Hammer, Package } from "lucide-svelte";
+	import { Hammer, Package } from "@lucide/svelte";
 
 	import C from "$lib/assets/icons/languages/c.svg";
 	import Cpp from "$lib/assets/icons/languages/cpp.svg";

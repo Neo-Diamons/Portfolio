@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Sun, Moon } from "lucide-svelte";
+	import { Sun, Moon } from "@lucide/svelte";
 
 	import { resetMode, setMode } from "mode-watcher";
 	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";

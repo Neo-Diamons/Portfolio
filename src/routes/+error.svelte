@@ -3,7 +3,7 @@
 
 	import Button from "$lib/components/ui/button/button.svelte";
 
-	import { Home } from "lucide-svelte";
+	import { Home } from "@lucide/svelte";
 </script>
 
 <div class="flex h-screen flex-col items-center justify-center">
