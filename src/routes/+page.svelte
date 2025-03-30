@@ -3,6 +3,7 @@
 
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Card from "$lib/components/ui/card/index.js";
+	import * as HoverCard from "$lib/components/ui/hover-card/index.js";
 	import { Badge } from "$lib/components/ui/badge/index.js";
 
 	import { Hammer, Package } from "lucide-svelte";
@@ -23,6 +24,7 @@
 	import GitHubActions from "$lib/assets/icons/devops/github-actions.svg";
 
 	import repositories from "$lib/assets/json/repositories.json";
+	import languages from "$lib/assets/json/languages.json";
 
 	const isMobile = new IsMobile();
 	const data: {
@@ -49,6 +51,18 @@
 			{ name: "GitHub Actions", icon: GitHubActions }
 		]
 	};
+
+	function sortLanguages(languages: Record<string, number>) {
+		const sum = Object.values(languages).reduce((a, b) => a + b, 0);
+		const sortedLanguages = Object.entries(languages)
+			.sort(([, a], [, b]) => b - a)
+			.map(([key, value]) => {
+				const percentage = ((value / sum) * 100).toFixed(2);
+				return { name: key, percentage };
+			});
+
+		return sortedLanguages;
+	}
 </script>
 
 {#snippet displayData(key: string)}
@@ -93,8 +107,8 @@
 		</div>
 		<div class="grid gap-4 md:grid-cols-2">
 			{#each repositories as data (data.name)}
-				<a href={data.url} target="_blank" rel="noreferrer">
-					<Card.Root class="flex h-full w-full flex-col justify-start">
+				<Card.Root class="flex h-full w-full flex-col justify-start overflow-hidden">
+					<a href={data.url} target="_blank" rel="noreferrer" class="flex h-full flex-col">
 						<Card.Header>
 							<Card.Title class="text-lg">{data.name}</Card.Title>
 							<Card.Description class="flex flex-row gap-1">
@@ -109,8 +123,30 @@
 						<Card.Footer class="text-small grow items-end opacity-50">
 							Last update: {new Date(data.lastUpdate).toLocaleDateString("en-US")}
 						</Card.Footer>
-					</Card.Root>
-				</a>
+					</a>
+					<div class="flex flex-row gap-1">
+						{#each sortLanguages(data.languages as unknown as Record<string, number>) as language (language)}
+							<HoverCard.Root openDelay={100} closeDelay={0}>
+								<HoverCard.Trigger
+									style="
+										width: {language.percentage}%;
+										background-color: {languages[language.name as keyof typeof languages]};"
+									class="h-1"
+								></HoverCard.Trigger>
+								<HoverCard.Content class="flex flex-row items-center gap-2">
+									<div
+										style="
+											background-color: {languages[language.name as keyof typeof languages]};"
+										class="size-4 rounded-full"
+									></div>
+									<p>
+										{language.name} - {language.percentage}%
+									</p>
+								</HoverCard.Content>
+							</HoverCard.Root>
+						{/each}
+					</div>
+				</Card.Root>
 			{/each}
 		</div>
 	</div>
